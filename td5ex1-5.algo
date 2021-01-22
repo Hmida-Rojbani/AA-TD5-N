@@ -1,0 +1,11 @@
+PROCEDURE  inserer2_3(VAR A : AB2_3, x : INTEGER)
+VAR
+    p , q : AB2_3
+BEGIN
+    p := localiser(A,x)
+    q := creer_noeud2_3()
+    q^:L := x
+    placer(q,p)
+    reajuster(q)
+    reequilibrer2_3(A, p)
+END
