@@ -1,0 +1,11 @@
+FUNCTION NbFeuilles2_3(A : AB2_3) : INTEGER
+BEGIN
+    IF (A = NIL) THEN
+        RETURN 0
+    ELSE_IF (A^.fils[1] = NIL) THEN // A^.fils[1] = NIL tester si le noeud est une feuille
+        RETURN 1
+    ELSE
+        RETURN NbFeuilles2_3(A^.fils[1]) + NbFeuilles2_3(A^.fils[2])
+         + NbFeuilles2_3(A^.fils[3])
+    END_IF
+END
