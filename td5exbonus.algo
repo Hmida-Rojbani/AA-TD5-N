@@ -1,0 +1,39 @@
+FUNCTION ValFeuille(A : AB2_3, S : LS, VAR V : INTEGER) : BOOLEAN
+BEGIN
+    IF (S = NIL AND A^.fils[1] = NIL) THEN
+        V := A^.L
+        RETURN TRUE
+    ELSE_IF (S <> NIL AND A^.fils[1] = NIL OR S = NIL AND A^.fils[1] <> NIL) THEN
+        RETURN FALSE
+    ELSE
+        RETURN ValFeuille(A^.fils[S^.val], S^.next, V)
+    END_IF
+END
+
+FUNCTION ChAcces(A :AB2_3, V : INTEGER, VAR S : LS) : BOOLEAN
+
+BEGIN
+    IF (A^.fils[1] = NIL AND A^.L = V) THEN
+        RETURN TRUE
+    ELSE_IF (A^.fils[1] = NIL AND A^.L <> V) THEN
+        S := NIL
+        RETURN FALSE
+    ELSE
+        IF (V <= A^.L) THEN
+            ajoute_queue(S, 1)
+            RETURN ChAcces(A^.fils[1], V, S)
+        ELSE_IF (V <= A^.M) THEN
+            ajoute_queue(S, 2)
+            RETURN ChAcces(A^.fils[2], V, S)
+        ELSE
+            IF (A^.fils[3] <> NIL)  THEN
+                ajoute_queue(S, 3)
+                RETURN ChAcces(A^.fils[3], V, S)
+            ELSE
+                S := NIL
+                RETURN FALSE
+            END_IF
+            
+        END_IF
+    END_IF
+END
